@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "Soundcloud Track IDer",
+  "version": "1.0.0",
+  "description": "Will prepend all track titles with their Track ID",
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "js": ["jquery-3.4.1.min.js", "inject_track_id.js"],
+      "matches": ["https://soundcloud.com/*"],
+      "run_at": "document_idle"
+    }
+  ]
+}
