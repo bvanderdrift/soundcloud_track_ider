@@ -1,7 +1,10 @@
 window.onload = () => {
   const soundcloudTrackId = getSoundcloudTrackIdFromDocument();
 
-  prependContentToTitle(`[${soundcloudTrackId}]`);
+  // We only get a track id if we are on a player page. Otherwise do nothing.
+  if (soundcloudTrackId !== null) {
+    prependContentToTitle(`[${soundcloudTrackId}]`);
+  }
 };
 
 const prependContentToTitle = content => {
@@ -22,6 +25,12 @@ const getSoundcloudTrackIdFromDocument = () => {
   const googleplaySoundcloudUrlMetaTag = $(
     "meta[property='twitter:app:url:googleplay']"
   );
+
+  // Check if we are on a track page, otherwise return null
+  if (googleplaySoundcloudUrlMetaTag === undefined) {
+    return null;
+  }
+
   const soundcloudTrackUrl = googleplaySoundcloudUrlMetaTag.prop("content");
   return soundcloudTrackUrl.replace("soundcloud://sounds:", "");
 };
